@@ -1,3 +1,6 @@
+Listo. A partir de ahora: **cuando me pidas index, te lo doy completo siempre** (sin partes).
+
+```html
 <!doctype html>
 <html lang="es">
 <head>
@@ -46,17 +49,19 @@
       overflow-x: hidden;
     }
 
-    /* Overlay background (adaptado, sin deformar) */
+    /* Overlay background (ajustado a pantalla, sin recortar ni deformar) */
     .bg-overlay{
       position: fixed;
       inset: 0;
       z-index: -2;
       background-image: url("https://iili.io/qfB2zS1.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      background-size: contain;      /* entra completa */
+      background-position: center;   /* centrada */
+      background-repeat: no-repeat;  /* sin mosaico */
+      background-color: var(--bg);   /* relleno sobrio si sobra espacio */
       transform: translateZ(0);
     }
+
     .bg-dim{
       position: fixed;
       inset: 0;
@@ -496,3 +501,4 @@
   </script>
 </body>
 </html>
+```
