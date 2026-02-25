@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lucas Pereyra | Curso de Mecánica y Regulación</title>
+  <meta name="description" content="Aprendé mecánica y regulación. Consultas e inscripciones por WhatsApp." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Lucas Pereyra | Curso de Mecánica y Regulación" />
+  <meta property="og:description" content="Aprendé mecánica y regulación. Consultas e inscripciones por WhatsApp." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://iili.io/qfqUJvn.png" />
+
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --panel: rgba(18, 24, 33, .72);
+      --panel2: rgba(18, 24, 33, .55);
+      --text: #eaf2ff;
+      --muted: rgba(234,242,255,.72);
+      --line: rgba(234,242,255,.14);
+      --accent: #22c55e; /* WA vibe, sobrio */
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 980px;
+    }
+
+    [data-theme="light"]{
+      --bg: #f6f8fb;
+      --panel: rgba(255,255,255,.78);
+      --panel2: rgba(255,255,255,.62);
+      --text: #0b1220;
+      --muted: rgba(11,18,32,.70);
+      --line: rgba(11,18,32,.12);
+      --shadow: 0 14px 44px rgba(0,0,0,.12);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    /* Overlay background (adaptado, sin deformar) */
+    .bg-overlay{
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: url("https://freeimage.host/i/qfqUJvn");
+      background-size: cover;          /* se adapta sin deformar */
+      background-position: center;     /* centrado */
+      background-repeat: no-repeat;
+      transform: translateZ(0);
+    }
+    .bg-dim{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(0,0,0,.40), transparent 60%),
+        radial-gradient(1000px 520px at 80% 20%, rgba(0,0,0,.34), transparent 55%),
+        linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.68));
+      pointer-events:none;
+    }
+    [data-theme="light"] .bg-dim{
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(1000px 520px at 80% 20%, rgba(255,255,255,.48), transparent 55%),
+        linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.78));
+    }
+
+    .wrap{
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header{
+      padding: 18px 0 8px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 0;
+    }
+    .logo{
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 10px;
+    }
+    .brand-text{
+      min-width:0;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .brand-text strong{
+      font-size: 14px;
+      letter-spacing: .2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand-text span{
+      font-size: 12px;
+      color: var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex: 0 0 auto;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing:.2px;
+      cursor:pointer;
+      box-shadow: var(--shadow);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0px); }
+    .btn-primary{
+      background: linear-gradient(180deg, rgba(34,197,94,.95), rgba(16,185,129,.92));
+      border-color: rgba(34,197,94,.35);
+      color: #04160a;
+    }
+
+    .icon{
+      width: 18px; height: 18px; display:inline-block;
+    }
+
+    main{
+      padding: 8px 0 24px;
+    }
+
+    .hero{
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-inner{
+      padding: 22px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .hero h1{
+      margin: 0 0 8px;
+      font-size: clamp(24px, 3.3vw, 38px);
+      line-height: 1.12;
+      letter-spacing: -.3px;
+    }
+    .hero p{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin: 0 0 16px;
+    }
+    .pill{
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.14);
+      color: var(--text);
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      letter-spacing: .2px;
+    }
+    [data-theme="light"] .pill{ background: rgba(11,18,32,.06); }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    .card{
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.16);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    [data-theme="light"] .card{ background: rgba(11,18,32,.06); }
+
+    .side h3{
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing:.2px;
+    }
+    .list{
+      margin: 0;
+      padding: 0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .list li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .dot{
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: rgba(34,197,94,.92);
+      margin-top: 4px;
+      flex: 0 0 auto;
+    }
+
+    .grid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .grid .mini{
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.14);
+      border-radius: var(--radius);
+      padding: 14px;
+      min-height: 96px;
+    }
+    [data-theme="light"] .grid .mini{ background: rgba(11,18,32,.05); }
+
+    .mini strong{
+      display:block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      letter-spacing:.2px;
+    }
+    .mini span{
+      display:block;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    footer{
+      padding: 18px 0 110px; /* espacio para el botón flotante */
+      color: var(--muted);
+      font-size: 12px;
+      text-align:center;
+    }
+    footer a{ color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* WhatsApp Floating Button */
+    .wa-float{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(18, 24, 33, .86);
+      border: 1px solid rgba(234,242,255,.18);
+      box-shadow: var(--shadow);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 800;
+      letter-spacing: .2px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    [data-theme="light"] .wa-float{
+      background: rgba(255,255,255,.86);
+      border-color: rgba(11,18,32,.16);
+    }
+    .wa-badge{
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      background: linear-gradient(180deg, rgba(34,197,94,.95), rgba(16,185,129,.92));
+      border: 1px solid rgba(34,197,94,.35);
+      flex: 0 0 auto;
+    }
+    .wa-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+    .wa-text small{
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing:.15px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px){
+      .wrap{ width: calc(100% - 22px); }
+      .btn{ padding: 10px 11px; }
+      .wa-float{ right: 12px; bottom: 12px; }
+      footer{ padding-bottom: 120px; }
+    }
+  </style>
+</head>
+
+<body data-theme="dark">
+  <div class="bg-overlay" aria-hidden="true"></div>
+  <div class="bg-dim" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo" aria-label="Logo">
+            <img src="https://iili.io/qfqUJvn.png" alt="Logo" />
+          </div>
+          <div class="brand-text">
+            <strong>Lucas Pereyra</strong>
+            <span>Curso de mecánica y regulación</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="themeBtn" type="button" aria-label="Cambiar tema">
+            <span class="icon" aria-hidden="true">
+              <!-- simple sun/moon -->
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            Tema
+          </button>
+
+          <a class="btn btn-primary" href="https://wa.link/63nmo2" target="_blank" rel="noopener">
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero" aria-label="Presentación">
+        <div class="hero-inner">
+          <div>
+            <h1>Aprendé mecánica y regulación, sin vueltas.</h1>
+            <p>
+              Cursos orientados a práctica real: diagnóstico, ajuste y puesta a punto.
+              Si querés info de fechas, modalidad y cupos, te respondo directo por WhatsApp.
+            </p>
+
+            <div class="pill-row" aria-label="Puntos clave">
+              <div class="pill">Mecánica</div>
+              <div class="pill">Regulación</div>
+              <div class="pill">Puesta a punto</div>
+              <div class="pill">Consultas por WhatsApp</div>
+            </div>
+
+            <div class="cta-row">
+              <a class="btn btn-primary" href="https://wa.link/63nmo2" target="_blank" rel="noopener">
+                Quiero anotarme / Consultar
+              </a>
+              <a class="btn" href="https://wa.link/63nmo2" target="_blank" rel="noopener" aria-label="Abrir WhatsApp con el número">
+                +54 2246 48-6865
+              </a>
+            </div>
+
+            <div class="grid" aria-label="Contenido del curso">
+              <div class="mini">
+                <strong>Fundamentos</strong>
+                <span>Herramientas, seguridad y metodología de trabajo.</span>
+              </div>
+              <div class="mini">
+                <strong>Regulación</strong>
+                <span>Ajustes, calibración y puesta a punto para que quede fino.</span>
+              </div>
+              <div class="mini">
+                <strong>Mantenimiento</strong>
+                <span>Chequeos, prevención y buenas prácticas para durar más.</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="side">
+            <div class="card">
+              <h3>Cómo avanzar</h3>
+              <ul class="list">
+                <li><span class="dot" aria-hidden="true"></span><span>Me escribís por WhatsApp.</span></li>
+                <li><span class="dot" aria-hidden="true"></span><span>Te paso info de próxima fecha, modalidad y cupos.</span></li>
+                <li><span class="dot" aria-hidden="true"></span><span>Si te cierra, coordinamos la inscripción.</span></li>
+              </ul>
+            </div>
+
+            <div style="height:12px"></div>
+
+            <div class="card">
+              <h3>Contacto directo</h3>
+              <p style="margin:0; color:var(--muted); font-size:13px; line-height:1.5">
+                WhatsApp: <strong style="color:var(--text)">+54 2246 48-6865</strong><br/>
+                Link: <strong style="color:var(--text)">wa.link/63nmo2</strong>
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <footer>
+        <div class="wrap">
+          Creado y diseñado por <a href="https://ciborg347.onrender.com" target="_blank" rel="noopener">Ciborg 347</a>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <a class="wa-float" href="https://wa.link/63nmo2" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <span class="wa-badge" aria-hidden="true">
+      <!-- WhatsApp icon (SVG inline) -->
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M19.11 17.86c-.28-.14-1.62-.8-1.87-.89-.25-.09-.43-.14-.6.14-.18.28-.69.89-.85 1.07-.16.18-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.12-.12.28-.32.43-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.5-.07-.14-.6-1.45-.82-1.98-.22-.53-.44-.46-.6-.47l-.51-.01c-.18 0-.46.07-.7.35-.25.28-.93.91-.93 2.22 0 1.31.95 2.58 1.08 2.76.14.18 1.87 2.86 4.52 4.01.63.27 1.12.43 1.5.55.63.2 1.2.17 1.66.1.51-.08 1.62-.66 1.85-1.3.23-.64.23-1.19.16-1.3-.07-.11-.25-.18-.53-.32Z" fill="#04160A"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.02 3C9.41 3 4.03 8.34 4.03 14.92c0 2.1.55 4.15 1.6 5.96L4 27.99l7.32-1.58a12.1 12.1 0 0 0 4.7.93h.01c6.61 0 11.99-5.34 11.99-11.92C28.02 8.34 22.64 3 16.02 3Zm0 21.82h-.01a9.92 9.92 0 0 1-4.25-.96l-.3-.14-4.34.94.92-4.23-.16-.29a9.88 9.88 0 0 1-1.52-5.22c0-5.45 4.46-9.88 9.95-9.88 5.49 0 9.95 4.43 9.95 9.88 0 5.45-4.46 9.88-9.95 9.88Z" fill="#04160A"/>
+      </svg>
+    </span>
+    <span class="wa-text">
+      WhatsApp
+      <small>Respuesta directa</small>
+    </span>
+  </a>
+
+  <script>
+    (function(){
+      const root = document.body;
+      const btn = document.getElementById('themeBtn');
+
+      // restore
+      const saved = localStorage.getItem('theme');
+      if(saved === 'light' || saved === 'dark'){
+        root.setAttribute('data-theme', saved);
+      }
+
+      btn.addEventListener('click', function(){
+        const current = root.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+  </script>
+</body>
+</html>
