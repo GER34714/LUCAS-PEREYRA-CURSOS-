@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="es">
 <head>
@@ -208,7 +209,7 @@
       display:flex;
       flex-wrap:wrap;
       gap:8px;
-      margin: 0 0 16px;
+      margin: 0 0 14px;
     }
     .pill{
       border: 1px solid var(--line);
@@ -226,7 +227,20 @@
       flex-wrap:wrap;
       gap:10px;
       align-items:center;
+      margin-bottom: 8px;
     }
+
+    .helper{
+      margin: 0 0 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px dashed var(--line);
+      background: rgba(0,0,0,.10);
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+    [data-theme="light"] .helper{ background: rgba(11,18,32,.04); }
 
     .card{
       border: 1px solid var(--line);
@@ -415,9 +429,16 @@
               <a class="btn btn-primary" href="https://wa.me/542246486865?text=Hola%20quiero%20el%20curso%20de%20mec%C3%A1nica%20y%20regulaci%C3%B3n%20de%20Lucas" target="_blank" rel="noopener">
                 Quiero anotarme / Consultar
               </a>
+              <a class="btn" href="https://api.whatsapp.com/send?phone=542246486865&text=Hola%20quiero%20el%20curso%20de%20mec%C3%A1nica%20y%20regulaci%C3%B3n%20de%20Lucas" target="_blank" rel="noopener">
+                Abrir WhatsApp (alternativo)
+              </a>
               <a class="btn" href="https://wa.me/542246486865?text=Hola%20quiero%20el%20curso%20de%20mec%C3%A1nica%20y%20regulaci%C3%B3n%20de%20Lucas" target="_blank" rel="noopener" aria-label="Abrir WhatsApp con el número">
                 +54 2246 48-6865
               </a>
+            </div>
+
+            <div class="helper">
+              Si estás desde TikTok y no abre WhatsApp, tocá los 3 puntitos (⋯) y elegí “Abrir en navegador / Chrome”, y después volvé a tocar el botón de WhatsApp.
             </div>
 
             <div class="grid" aria-label="Contenido del curso">
@@ -498,3 +519,4 @@
   </script>
 </body>
 </html>
+```
